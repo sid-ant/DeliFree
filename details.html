@@ -2,7 +2,7 @@
 <html>
 <title>W3.CSS Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -19,13 +19,44 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
-  <img class="w3-image" src="/w3images/white.jpg" alt="London" width="1500" height="700">
+  <img class="w3-image" src="img/white.jpg" alt="London" width="1500" height="700">
+
+  <div class="w3-display-topright" style="margin-left:5%;margin-right:5%;margin-top:2%;">
+    <!-- <ul class="w3-navbar w3-black" style="height:30px">
+      <li class="w3-red" style="height:30px;padding-left:5px;padding-right:5px"> Advertisement </li>
+    </ul>
+    <div class="w3-container w3-white">
+      <img src="img/ads/1.jpg" alt="Lights" class="w3-image">
+    </div> -->
+    <div class="w3-card-4">
+      <img src="img/ads/1.jpg" alt="ad">
+      <div class="w3-container w3-center">
+          <!-- <span style="color:white;height:20px"> advertisement</span> -->
+        </div>
+</div>
+  </div>
+
+  <div class="w3-display-bottomright" style="margin-left:5%;margin-right:5%;margin-bottom:5%">
+    <!-- <ul class="w3-navbar w3-black" style="height:30px">
+      <li class="w3-red" style="height:30px;padding-left:5px;padding-right:5px"> Advertisement </li>
+    </ul>
+    <div class="w3-container w3-white">
+      <img src="img/ads/1.jpg" alt="Lights" class="w3-image">
+    </div> -->
+    <div class="w3-card-4">
+      <img src="img/ads/2.jpg" alt="ad" class="w3-image" style="width:300px; height:270px">
+      <div class="w3-container w3-center">
+          <!-- <p style="color:white;"> advertisement</p> -->
+        </div>
+</div>
+  </div>
+
+
   <div class="w3-display-left" style="margin-left:5%;width:60%;margin-top:-10%;">
     <ul class="w3-navbar w3-black">
-      <!-- <li><a href="javascript:void(0)" class="tablink" onclick="openLink(event, 'Hotel');"><i class="w3-margin-right"></i>Welcome</a></li> -->
       <li><a href="javascript:void(0)" class="tablink" onclick="openLink(event, 'Flight');"><i class="fa fa-plane w3-margin-right"></i>Product Details</a></li>
-      <!-- <li><a href="javascript:void(0)" class="tablink" onclick="openLink(event, 'Car');"><i class="fa fa-car w3-margin-right"></i>Rental</a></li> -->
     </ul>
+
 
     <!-- Tabs -->
     <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
@@ -40,40 +71,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <label> Product's Seller </label>
       <br>
     </div>
-      <!-- <div class="w3-row-padding" style="margin:0 -16px;">
 
-        <div class="w3-half">
-          <label>Product Link</label>
-          <input class="w3-input w3-border" type="text" placeholder="Paste Your Product Link">
-        </div>
-        <div class="w3-half">
-          <label> Enter Location </label>
-          <input class="w3-input w3-border" type="text" placeholder="Location">
-        </div>
-      </div> -->
       <p><button class="w3-btn w3-dark-grey" style="float:right">Confirm and Search</button></p>
     </div>
 
-    <!-- <div id="Hotel" class="w3-container w3-white w3-padding-16 myLink">
-      <h3>Say GoodBye To Delivery Charges Forever</h3>
-      <p> All you have to do is provide us with the link and the location </p>
-      <p> We will contact you with your delivery patner </p>
-      <p><button class="w3-btn w3-dark-grey"> Product Details </button></p>
-    </div> -->
 
-    <!-- <div id="Car" class="w3-container w3-white w3-padding-16 myLink">
-      <h3>Best car rental in the world!</h3>
-      <p><span class="w3-tag w3-deep-orange">DISCOUNT!</span> Special offer if you book today: 25% off anywhere in the world with CarServiceRentalRUs</p>
-      <input class="w3-input w3-border" type="text" placeholder="Pick-up point">
-      <p><button class="w3-btn w3-dark-grey">Search Availability</button></p>
-    </div> -->
   </div>
 </header>
-<!-- End page content -->
-<!-- Footer -->
-<!-- <footer class="w3-container w3-center w3-opacity w3-margin-bottom">
-  <h5>Making Delivery Charges A Thing of Past</h5>
-</footer> -->
 
 <script>
 // Tabs
@@ -85,10 +89,10 @@ function openLink(evt, linkName) {
   }
   tablinks = document.getElementsByClassName("tablink");
   for (i = 0; i < x.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+      tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
   }
   document.getElementById(linkName).style.display = "block";
-  evt.currentTarget.className += " w3-red";
+  evt.currentTarget.className += " w3-green";
 }
 // Click on the first tablink on load
 document.getElementsByClassName("tablink")[0].click();
