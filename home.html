@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-<title> DeliFree </title>
+<title> DeliFree: Say GoodBye To Delivery Charges </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/login.css">
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 .myLink {display: none}
@@ -14,7 +15,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <!-- Navigation Bar -->
 <ul class="w3-navbar w3-white w3-border-bottom w3-xlarge">
   <li><a href="#" class="w3-text-red w3-hover-red"><b><i class="fa fa-plane w3-margin-right"></i>DeliFree</b></a></li>
-  <li class="w3-right"><a href="#" class="w3-hover-red w3-text-grey"><i class="fa fa-search"></i></a></li>
+  <li class="w3-right" style="margin-right:5px"> <button class="w3-btn w3-red w3-medium" style="margin-left:5px;" onclick="document.getElementById('register').style.display='block'">Register</button> </li>
+  <li class="w3-right"> <button class="w3-btn w3-red w3-medium" onclick="document.getElementById('id01').style.display='block'">Login</button> </li>
+
 </ul>
 
 <!-- Header -->
@@ -50,19 +53,85 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <p><button class="w3-btn w3-dark-grey"> Product Details </button></p>
     </div>
 
-    <!-- <div id="Car" class="w3-container w3-white w3-padding-16 myLink">
-      <h3>Best car rental in the world!</h3>
-      <p><span class="w3-tag w3-deep-orange">DISCOUNT!</span> Special offer if you book today: 25% off anywhere in the world with CarServiceRentalRUs</p>
-      <input class="w3-input w3-border" type="text" placeholder="Pick-up point">
-      <p><button class="w3-btn w3-dark-grey">Search Availability</button></p>
-    </div> -->
   </div>
 </header>
-<!-- End page content -->
-<!-- Footer -->
-<!-- <footer class="w3-container w3-center w3-opacity w3-margin-bottom">
-  <h5>Making Delivery Charges A Thing of Past</h5>
-</footer> -->
+
+
+<!--Login  -->
+
+<div id="id01" class="modal">
+
+  <form class="modal-content animate" action="action_page.php">
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <button type="submit">Login</button>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+
+<!--Register  -->
+
+<div id="register" class="modal">
+
+  <form class="modal-content animate" action="action_page.php">
+
+    <div class="container">
+
+      <label><b>Name</b></label>
+      <input type="text" placeholder="Enter Name" name="uname" required>
+      <br>
+      <label><b>Email</b></label>
+      <br>
+      <input type="email" placeholder="Enter Email" name="uemail" required>
+      <br>
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+      <br>
+      <label><b>Re-Enter Password</b></label>
+      <input type="password" placeholder="Enter Password" name="rpsw" required>
+      <br>
+      <label><b>Contact Number</b></label>
+      <input type="number" placeholder="Enter Your Phone Number" name="unumber" required>
+      <br>
+      <label><b>Do you want to contacted via whatsapp? </b></label>
+      <input type="number" placeholder="Enter Your Phone Number" name="unumber" required>
+
+
+      <button type="submit">Register</button>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<!-- Login/Register script  -->
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+var modal2= document.getElementById('register');
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal||event.target==modal2) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+
 
 <script>
 // Tabs
