@@ -1,3 +1,10 @@
+<?php
+session_start();
+include("dbconn.php");
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <title> DeliFree: Say GoodBye To Delivery Charges </title>
@@ -57,6 +64,47 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </header>
 
 
+<!-- messages to display upon registration -->
+
+<div id="userExists" class="modal">
+  <div class="container">
+    The User with the email already exists! Please enter again.
+  </div>
+
+</div>
+
+<div id="userAdded" class="modal" style="width:30%">
+  <div class="container" style="background-color:#f1f1f1">
+    You have been successfully registered. Please check your email to activate your account.
+    <button type="button" onclick="document.getElementById('userAdded').style.display='none'" class="cancelbtn">Close</button>
+  </div>
+</div>
+
+
+<!-- registered status -->
+<?php
+
+  if (isset($_SESSION["registerAttempted"]) && $_SESSION["registerAttempted"]==1){
+      if(isset($_SESSION["userExists"]) && $_SESSION["userExists"]==1){
+
+        ?>
+        <script>
+        document.getElementById('userExists').style.display='block';
+        </script>
+        <?php
+      }
+      else if(isset($_SESSION["userAdded"]) && $_SESSION["userAdded"]==1){
+        ?>
+        <script>
+        document.getElementById('userAdded').style.display='block';
+        </script>
+        <?php
+      }
+  }
+
+ ?>
+
+
 <!--Login  -->
 
 <div id="id01" class="modal">
@@ -70,7 +118,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
 
-      <button type="submit">Login</button>
+      <input type="submit" class="w3-btn w3-medium w3-red" name="submitLogin">Login</input>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -81,10 +129,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </div>
 
 <!--Register  -->
-
 <div id="register" class="modal">
 
-  <form class="modal-content animate" action="action_page.php">
+  <form class="modal-content animate" action="register.php" method="post">
 
     <div class="container">
 
@@ -105,10 +152,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <input type="number" placeholder="Enter Your Phone Number" name="unumber" required>
       <br>
       <label><b>Do you want to contacted via whatsapp? </b></label>
-      <input type="number" placeholder="Enter Your Phone Number" name="unumber" required>
+      <input type="number" placeholder="Enter Your Phone Number" name="whatsapp" required>
+      <input type="submit" class="w3-btn w3-medium w3-red" name="submitRegister" value=Register> </input>
 
-
-      <button type="submit">Register</button>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -122,10 +168,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 // Get the modal
 var modal = document.getElementById('id01');
 var modal2= document.getElementById('register');
+var model3 =document.getElementById('userAdded');
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal||event.target==modal2) {
         modal.style.display = "none";
+        modal2.style.display = "none";
+        modal3.style.display = "none";
     }
 }
 </script>
