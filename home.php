@@ -1,8 +1,5 @@
 <?php
 session_start();
-
-
-
 ?>
 
 <!-- checkin if logged in or not -->
@@ -34,6 +31,54 @@ if (isset($_SESSION['logIN']) && $_SESSION['logIN']==1){
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 .myLink {display: none}
 </style>
+
+<script>
+
+  function checkforfields(){
+    var link = document.forms["productdetailsform"]["plink"].value;
+    var loc = document.forms["productdetailsform"]["dlocation"].value;
+
+    if(link==null||link==""||loc==null||loc==""){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  function messages(msgs){
+    document.getElementById('msgtxt').innerHTML=msgs;
+    document.getElementById('impmessages').style.display='block';
+  }
+
+  function productdetails(){
+
+    if (logIN==1){
+      if(checkforfields()==true){
+          document.getElementById("product").submit();
+      }
+      else{
+          messages("Link and Location are requried");
+      }
+
+    }
+    else {
+
+    // var msgx = document.getElementById("info");
+    // if (msgx.className.indexOf("w3-show") == -1) {
+    //     msgx.className += " w3-show";
+    //   }
+    // else {
+    //     msgx.className = msgx.className.replace(" w3-show", "");
+    // }
+    messages("Please Login First");
+  }
+  }
+
+</script>
+
+
+
 <body class="w3-light-grey">
 
 <?php include("navigationbar.php"); ?>
@@ -53,7 +98,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <!-- Form for product details -->
     <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
       <h3>Say GoodBye To Delivery Charges Forever</h3>
-      <form id="product" action="insert.php" method="post">
+      <form id="product" action="insert.php" method="post" name="productdetailsform" onsubmit="return checkforfields()">
       <div class="w3-row-padding" style="margin:0 -16px;">
         <div class="w3-half">
           <label>Product Link</label>
@@ -67,7 +112,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       </form>
       <p><button class="w3-btn w3-dark-grey" onclick="productdetails()"> Submit </button></p>
       <div id="info" class="w3-dropdown-content w3-animate-zoom">
-      <p> please login first </p>
+      <p> Please Login First </p>
       </div>
 
     </div>
@@ -77,11 +122,23 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <h3>Say GoodBye To Delivery Charges Forever</h3>
       <p> All you have to do is provide us with the link and the location </p>
       <p> We will contact you with your delivery patner </p>
-      <p><button class="w3-btn w3-dark-grey"> Product Details </button></p>
     </div>
 
   </div>
 </header>
+
+<!-- important messages -->
+  <div class="w3-container">
+    <div id="impmessages" class="w3-modal">
+      <div class="w3-modal-content w3-animate-top w3-card-8">
+      <div class="w3-container w3-red">
+        <span onclick="document.getElementById('impmessages').style.display='none'"
+        class="w3-closebtn">&times;</span>
+          <p id="msgtxt">Some text</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- messages to display upon registration -->
@@ -131,9 +188,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   if(isset($_SESSION["logINfailed"]) && $_SESSION["logINfailed"]==1){
     ?>
     <script>
-    window.alert("login failed dude");
-    document.getElementById('id01').style.display='block';
-    document.getElementById('msg').innerHTML='Login Failed';
+    // window.alert("login failed dude");
+    messages("Incorrect Credentials | Login Failed");
     </script>
     <?php
   }
@@ -216,24 +272,6 @@ window.onclick = function(event) {
     }
 }
 
-
-function productdetails(){
-  console.log(logIN);
-  if (logIN==1){
-    document.getElementById("product").submit();
-  }
-  else {
-  var msgx = document.getElementById("info");
-  if (msgx.className.indexOf("w3-show") == -1) {
-      msgx.className += " w3-show";
-    }
-  else {
-      msgx.className = msgx.className.replace(" w3-show", "");
-  }
-}
-}
-
-
 </script>
 
 
@@ -260,6 +298,6 @@ document.getElementsByClassName("tablink")[0].click();
 // session_unset();
 // session_destroy();
  ?>
-
+<!-- </header> -->
 </body>
 </html>

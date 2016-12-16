@@ -8,6 +8,7 @@
 
   if(isset($_REQUEST['ad'])){
     $did = $_REQUEST['ad'];
+    $_SESSION['ad']=$did;
     $datadetails=mysqli_fetch_array(mysqli_query($conn,"SELECT * from $dataTableName where id='$did'"));
     $useremail=$datadetails['email'];
     $userdetails=mysqli_fetch_array(mysqli_query($conn,"SELECT * from $userTableName where email='$useremail'"));
@@ -28,8 +29,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </style>
 <body class="w3-light-grey">
 
+<script>
+  function completed(x){
+    if(x==1){
+      document.getElementById("doneDel").submit();
+    }
+    else if(x==0){
+      document.getElementById("doneDo").submit();
+    }
+
+  }
+</script>
+
 <?php include('navigationbar.php'); ?>
 
+<form id="doneDel" method="post" action="completed.php">
+  <input type="hidden" value="1" name="finishdel"> </input>
+</form>
+
+<form id="doneDo" method="post" action="completed.php">
+  <input type="hidden" value="0" name="finishdo"> </input>
+</form>
 <!-- Header -->
 <!-- <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
   <img class="w3-image" src="img/white.jpg" alt="London" width="1500" height="700"> -->
@@ -75,8 +95,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       Did this complete your order?
       <br>
       Would you like to remove your ad?
-    <p><button class="w3-btn w3-sand" style="float:right">NO</p>
-    <p><button class="w3-btn w3-indigo" style="float:right">YES</p>
+    <p><button class="w3-btn w3-sand" style="float:right" onclick="completed('1');">NO</p>
+    <p><button class="w3-btn w3-indigo" style="float:right" onclick="completed('0');">YES</p>
     </div>
   </div>
 
