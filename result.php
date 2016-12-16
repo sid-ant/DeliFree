@@ -11,7 +11,8 @@
   $datadetails=mysqli_fetch_array(mysqli_query($conn,"SELECT * from $dataTableName where id='$did'"));
   $price = $datadetails['price'];
   $location = $datadetails['location'];
-  $matches=mysqli_query($conn,"SELECT * FROM $dataTableName WHERE location = '$location' and price+$price>=500 and id<>$did and status='1' and sold='0'");
+  $seller = $datadetails['seller'];
+  $matches=mysqli_query($conn,"SELECT * FROM $dataTableName WHERE location = '$location' and price+$price>=500 and id<>$did and status='1' and sold='0' and seller='$seller'");
 
   // mysqli_fetch_array(
 
@@ -44,7 +45,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <?php
   $i=1;
-  if(mysqli_num_rows($matches))
+  if($matches!=FALSE)
     while($row = mysqli_fetch_array($matches)){
       ?>
 
@@ -60,7 +61,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <br>
     <label> Product Seller: <?php echo $row['seller']; ?></label>
     <br>
-  <p><button class="w3-btn w3-dark-grey" style="float:right">Contact User</button></p>
+    <form action="done.php" method="post">
+      <input type='hidden' value='<?php echo $row['id'] ?>' name='ad'>
+  <p><input type='submit' class="w3-btn w3-dark-grey" style="float:right" value='Contact User'></input></p>
+    </form>
   </div>
 </div>
 </div>
