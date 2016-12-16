@@ -16,5 +16,5 @@
                                   VALUES ('$uid','$uemail','$link','$location')";
   $run=$conn->query($sql);
   $_SESSION['did']=$conn->insert_id;
-  //header("location:details.php");
+  header("location:details.php");
  ?>

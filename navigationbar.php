@@ -15,7 +15,7 @@ function drop() {
 if(isset($_SESSION["logIN"]) && $_SESSION["logIN"]==1){
 ?>
 <ul class="w3-navbar w3-white w3-border-bottom w3-xlarge">
-  <li><a href="#" class="w3-text-red w3-hover-red"><b><i class="fa fa-plane w3-margin-right"></i>DeliFree</b></a></li>
+  <li><a href="home.php" class="w3-text-red w3-hover-red"><b><i class="fa fa-plane w3-margin-right"></i>DeliFree</b></a></li>
   <li class="w3-right">
   <div class="w3-dropdown-hover">
     <button onclick="drop()" class="w3-btn w3-red w3-medium">Hey <?php echo $_SESSION['userName']; ?> </button>
