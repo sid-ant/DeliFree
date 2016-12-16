@@ -1,3 +1,22 @@
+<?php
+  session_start();
+  include("dbconn.php");
+
+// if not logged in redirect to home.
+// add other restrictions as well
+
+
+  $dataTableName = "listings";
+  $userTableName = "users";
+  $uid = $_SESSION['uid'];
+  $did = $_SESSION['did'];
+  $datadetails=mysqli_fetch_array(mysqli_query($conn,"SELECT * from $dataTableName where id='$did'"));
+  $userdetails=mysqli_fetch_array(mysqli_query($conn,"SELECT * from $userTableName where id='$uid'"));
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <title>DeliFree: Say GoodBye To Delivery Charges</title>
@@ -11,42 +30,24 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </style>
 <body class="w3-light-grey">
 
-<!-- Navigation Bar -->
-<ul class="w3-navbar w3-white w3-border-bottom w3-xlarge">
-  <li><a href="#" class="w3-text-red w3-hover-red"><b><i class="fa fa-plane w3-margin-right"></i>DeliFree</b></a></li>
-  <li class="w3-right"><a href="#" class="w3-hover-red w3-text-grey"><i class="fa fa-search"></i></a></li>
-</ul>
+<?php include("navigationbar.php"); ?>
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
   <img class="w3-image" src="img/white.jpg" alt="London" width="1500" height="700">
 
   <div class="w3-display-topright" style="margin-left:5%;margin-right:5%;margin-top:2%;">
-    <!-- <ul class="w3-navbar w3-black" style="height:30px">
-      <li class="w3-red" style="height:30px;padding-left:5px;padding-right:5px"> Advertisement </li>
-    </ul>
-    <div class="w3-container w3-white">
-      <img src="img/ads/1.jpg" alt="Lights" class="w3-image">
-    </div> -->
     <div class="w3-card-4">
       <img src="img/ads/1.jpg" alt="ad">
       <div class="w3-container w3-center">
-          <!-- <span style="color:white;height:20px"> advertisement</span> -->
         </div>
 </div>
   </div>
 
   <div class="w3-display-bottomright" style="margin-left:5%;margin-right:5%;margin-bottom:5%">
-    <!-- <ul class="w3-navbar w3-black" style="height:30px">
-      <li class="w3-red" style="height:30px;padding-left:5px;padding-right:5px"> Advertisement </li>
-    </ul>
-    <div class="w3-container w3-white">
-      <img src="img/ads/1.jpg" alt="Lights" class="w3-image">
-    </div> -->
     <div class="w3-card-4">
       <img src="img/ads/2.jpg" alt="ad" class="w3-image" style="width:300px; height:270px">
       <div class="w3-container w3-center">
-          <!-- <p style="color:white;"> advertisement</p> -->
         </div>
 </div>
   </div>
@@ -62,24 +63,35 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
       <h3> Your Product Details Are: </h3>
       <div>
-      <label> Product Link </label>
+      <label> Product Link: <?php echo $datadetails['link'];  ?></label>
       <br>
-      <label> Product Name </label>
+      <label> Product Name: <?php echo $datadetails['pname']; ?> </label>
       <br>
-      <label> Product Price </label>
+      <label> Product Price <?php echo $datadetails['price']; ?></label>
       <br>
-      <label> Product's Seller </label>
+      <label> Product's Seller <?php echo $datadetails['seller']; ?> </label>
+      <br>
+      <label> Sellected Location <?php echo $datadetails['location']; ?> </label>
       <br>
     </div>
-
-      <p><button class="w3-btn w3-dark-grey" style="float:right">Confirm and Search</button></p>
+    <p><button class="w3-btn w3-dark-green" style="float:right" onclick="confirm()">Confirm and Search</button></p>
     </div>
 
 
   </div>
 </header>
 
+
+<form id="tale" method="post" action="updatedetails.php">
+    <input type="hidden" value="confirmed" name="letitgo">
+</form>
+
 <script>
+
+function confirm(){
+  
+}
+
 // Tabs
 function openLink(evt, linkName) {
   var i, x, tablinks;

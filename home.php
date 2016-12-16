@@ -57,11 +57,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <div class="w3-row-padding" style="margin:0 -16px;">
         <div class="w3-half">
           <label>Product Link</label>
-          <input class="w3-input w3-border" type="text" placeholder="Paste Your Product Link" required="required">
+          <input class="w3-input w3-border" type="text" name="plink" placeholder="Paste Your Product Link" required="required">
         </div>
         <div class="w3-half">
           <label> Enter Location </label>
-          <input class="w3-input w3-border" type="text" placeholder="Location" required="required">
+          <input class="w3-input w3-border" type="text" name="dlocation" placeholder="Location" required="required">
         </div>
       </div>
       </form>

@@ -51,6 +51,7 @@ if(isset($_REQUEST['submitLogin'])){
   if($row['email']!=null && $row['password']!=null){
     $_SESSION["logIN"]=1;
     $_SESSION["userName"]=$row["name"];
+    $_SESSION["uid"]=$row["id"];
     header("Location:home.php");
     die();
   }
