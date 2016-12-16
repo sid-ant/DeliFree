@@ -1,9 +1,26 @@
 <?php
 session_start();
-include("dbconn.php");
+
 
 
 ?>
+
+<!-- checkin if logged in or not -->
+<?php
+if (isset($_SESSION['logIN']) && $_SESSION['logIN']==1){
+  ?>
+  <script>
+  var logIN = 1;
+  </script>
+  <?php }
+  else {
+  ?>
+  <script>
+  var logIN = 0;
+  </script>
+  <?php }
+  ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -19,13 +36,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </style>
 <body class="w3-light-grey">
 
-<!-- Navigation Bar -->
-<ul class="w3-navbar w3-white w3-border-bottom w3-xlarge">
-  <li><a href="#" class="w3-text-red w3-hover-red"><b><i class="fa fa-plane w3-margin-right"></i>DeliFree</b></a></li>
-  <li class="w3-right" style="margin-right:5px"> <button class="w3-btn w3-red w3-medium" style="margin-left:5px;" onclick="document.getElementById('register').style.display='block'">Register</button> </li>
-  <li class="w3-right"> <button class="w3-btn w3-red w3-medium" onclick="document.getElementById('id01').style.display='block'">Login</button> </li>
-
-</ul>
+<?php include("navigationbar.php"); ?>
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
@@ -38,21 +49,30 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     </ul>
 
     <!-- Tabs -->
+
+    <!-- Form for product details -->
     <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
       <h3>Say GoodBye To Delivery Charges Forever</h3>
+      <form id="product" action="insert.php" method="post">
       <div class="w3-row-padding" style="margin:0 -16px;">
         <div class="w3-half">
           <label>Product Link</label>
-          <input class="w3-input w3-border" type="text" placeholder="Paste Your Product Link">
+          <input class="w3-input w3-border" type="text" placeholder="Paste Your Product Link" required="required">
         </div>
         <div class="w3-half">
           <label> Enter Location </label>
-          <input class="w3-input w3-border" type="text" placeholder="Location">
+          <input class="w3-input w3-border" type="text" placeholder="Location" required="required">
         </div>
       </div>
-      <p><button class="w3-btn w3-dark-grey">Submit Link</button></p>
+      </form>
+      <p><button class="w3-btn w3-dark-grey" onclick="productdetails()"> Submit </button></p>
+      <div id="info" class="w3-dropdown-content w3-animate-zoom">
+      <p> please login first </p>
+      </div>
+
     </div>
 
+    <!-- Weclome div  -->
     <div id="Hotel" class="w3-container w3-white w3-padding-16 myLink">
       <h3>Say GoodBye To Delivery Charges Forever</h3>
       <p> All you have to do is provide us with the link and the location </p>
@@ -66,18 +86,24 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <!-- messages to display upon registration -->
 
-<div id="userExists" class="modal">
-  <div class="container">
-    The User with the email already exists! Please enter again.
+<div id="userExists" class="modal" style="display:'block'">
+  <div class="modal-content animate">
+  <div class="container" style="background-color:#f1f1f1">
+    <span style="color:red">The User with the email already exists!</span>
   </div>
-
+  </div>
 </div>
 
-<div id="userAdded" class="modal" style="width:30%">
+<div id="userAdded" class="modal" style="display:'block'">
+  <div class="modal-content animate">
   <div class="container" style="background-color:#f1f1f1">
-    You have been successfully registered. Please check your email to activate your account.
+    You have been successfully registered.
+    <br>
+    Please check your email to activate your account.
+    <br>
     <button type="button" onclick="document.getElementById('userAdded').style.display='none'" class="cancelbtn">Close</button>
   </div>
+</div>
 </div>
 
 
@@ -102,6 +128,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       }
   }
 
+  if(isset($_SESSION["logINfailed"]) && $_SESSION["logINfailed"]==1){
+    ?>
+    <script>
+    window.alert("login failed dude");
+    document.getElementById('id01').style.display='block';
+    document.getElementById('msg').innerHTML='Login Failed';
+    </script>
+    <?php
+  }
+
  ?>
 
 
@@ -109,16 +145,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <div id="id01" class="modal">
 
-  <form class="modal-content animate" action="action_page.php">
+  <form class="modal-content animate" action="register.php">
 
     <div class="container">
+      <span id="msg" style:"color:red"> </span>
       <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <input type="email" placeholder="Enter Email" name="uemail" required>
 
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
 
-      <input type="submit" class="w3-btn w3-medium w3-red" name="submitLogin">Login</input>
+      <input type="submit" class="w3-btn w3-medium w3-red" name="submitLogin" value="Login"></input>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -153,12 +190,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <br>
       <label><b>Do you want to contacted via whatsapp? </b></label>
       <input type="number" placeholder="Enter Your Phone Number" name="whatsapp" required>
-      <input type="submit" class="w3-btn w3-medium w3-red" name="submitRegister" value=Register> </input>
-
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
+      <span>
+      <input type="submit" class="w3-btn w3-medium w3-red" name="submitRegister" value=Register style:"float:left"> </input>
+      <button type="button" onclick="document.getElementById('register').style.display='none'" class="w3-btn w3-medium w3-red" style:"float:left">Cancel</button>
+      </span>
     </div>
   </form>
 </div>
@@ -168,18 +203,38 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 // Get the modal
 var modal = document.getElementById('id01');
 var modal2= document.getElementById('register');
-var model3 =document.getElementById('userAdded');
+var modal3=document.getElementById('userAdded');
+var modal4=document.getElementById('userExists');
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal||event.target==modal2) {
+    if (event.target == modal||event.target==modal2||event.target==modal3||event.target==modal4) {
         modal.style.display = "none";
         modal2.style.display = "none";
         modal3.style.display = "none";
+        modal4.style.display="none";
     }
 }
+
+
+function productdetails(){
+  console.log(logIN);
+  if (logIN==1){
+    document.getElementById("product").submit();
+  }
+  else {
+  var msgx = document.getElementById("info");
+  if (msgx.className.indexOf("w3-show") == -1) {
+      msgx.className += " w3-show";
+    }
+  else {
+      msgx.className = msgx.className.replace(" w3-show", "");
+  }
+}
+}
+
+
 </script>
-
-
 
 
 <script>
@@ -200,6 +255,11 @@ function openLink(evt, linkName) {
 // Click on the first tablink on load
 document.getElementsByClassName("tablink")[0].click();
 </script>
+
+<?php
+// session_unset();
+// session_destroy();
+ ?>
 
 </body>
 </html>

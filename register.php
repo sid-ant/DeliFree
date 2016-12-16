@@ -4,7 +4,15 @@ session_start();
 include("dbconn.php");
 $tablename="users";
 $_SESSION["userExists"]=0;
-$_SESSION["userAdded"]=1;
+$_SESSION["userAdded"]=0;
+$_SESSION["logINfailed"]=0;
+
+if(isset($_REQUEST['logOUT'])){
+  $_SESSION["logIN"]=0;
+  header("location:home.php");
+  die();
+}
+
 
 if(isset($_REQUEST['submitRegister'])){
 
@@ -34,5 +42,23 @@ if(isset($_REQUEST['submitRegister'])){
       die();
       }
 }
+
+if(isset($_REQUEST['submitLogin'])){
+  $email = htmlspecialchars($_REQUEST['uemail']);
+  $password = htmlspecialchars($_REQUEST['psw']);}
+
+  $row=  mysqli_fetch_array(mysqli_query($conn,"SELECT * from $tablename where email='$email' and password='$password'"));
+  if($row['email']!=null && $row['password']!=null){
+    $_SESSION["logIN"]=1;
+    $_SESSION["userName"]=$row["name"];
+    header("Location:home.php");
+    die();
+  }
+  else{
+    $_SESSION["logINfailed"]=1;
+    header("Location:home.php");
+    die();
+  }
+
 
 ?>
