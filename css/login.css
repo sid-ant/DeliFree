@@ -5,8 +5,16 @@ input[type=text], input[type=password],input[type=email],input[type=number],inpu
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    
 }
-
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 /* Set a style for all buttons */
 button {
     background-color: #4CAF50;

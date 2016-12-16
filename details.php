@@ -2,9 +2,13 @@
   session_start();
   include("dbconn.php");
 
-// if not logged in redirect to home.
-// add other restrictions as well
-
+  if(isset($_SESSION["logIN"]) && $_SESSION["logIN"]==1){
+      continue;
+    }
+  else{
+      header('location:home.php');
+      die();
+  }
 
   $dataTableName = "listings";
   $userTableName = "users";
@@ -32,17 +36,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <?php include("navigationbar.php"); ?>
 
-<!-- Header -->
-<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
-  <img class="w3-image" src="img/white.jpg" alt="London" width="1500" height="700">
 
-  <div class="w3-display-topright" style="margin-left:5%;margin-right:5%;margin-top:2%;">
+  <!-- <div class="row" style="margin-left:5%;margin-top:2%;width:60%"> -->
+
+  <!-- <div class="w3-display-topright" style="margin-left:5%;margin-right:5%;margin-top:2%;">
     <div class="w3-card-4">
       <img src="img/ads/1.jpg" alt="ad">
       <div class="w3-container w3-center">
         </div>
 </div>
   </div>
+</div>
 
   <div class="w3-display-bottomright" style="margin-left:5%;margin-right:5%;margin-bottom:5%">
     <div class="w3-card-4">
@@ -50,37 +54,52 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <div class="w3-container w3-center">
         </div>
 </div>
-  </div>
+  </div> -->
 
 
-  <div class="w3-display-left" style="margin-left:5%;width:60%;margin-top:-10%;">
-    <ul class="w3-navbar w3-black">
-      <li><a href="javascript:void(0)" class="tablink" onclick="openLink(event, 'Flight');"><i class="fa fa-plane w3-margin-right"></i>Product Details</a></li>
+  <div class="row">
+  <div style="margin-left:5%;margin-bottom:2%;width:60%;margin-top:2%">
+    <ul class="w3-navbar w3-green">
+      <li class="w3-red"><a href="#"><i class="fa fa-plane w3-margin-right"></i> Product Details</a></li>
     </ul>
 
-
-    <!-- Tabs -->
-    <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
+    <div class="w3-container w3-white w3-padding-16">
       <h3> Your Product Details Are: </h3>
       <div>
-      <label> Product Link: <?php echo $datadetails['link'];  ?></label>
+      <label> Product Link:  </label> <br>
+        <input type="text" value="<?php echo $datadetails['link']; ?>" readonly> </input>
       <br>
-      <label> Product Name: <?php echo $datadetails['pname']; ?> </label>
+      <label> Product Name: <br> <input type="text" value="<?php echo $datadetails['pname']; ?>" readonly> </input> </label>
       <br>
-      <label> Product Price <?php echo $datadetails['price']; ?></label>
+      <label> Product Price: <br> <input type="text" value="<?php echo $datadetails['price']; ?>" readonly> </input></label>
       <br>
-      <label> Product's Seller <?php echo $datadetails['seller']; ?> </label>
+      <label> Product's Seller: <br> <input type="text" value="<?php echo $datadetails['seller']; ?>" readonly> </input> </label>
       <br>
-      <label> Sellected Location <?php echo $datadetails['location']; ?> </label>
+      <label> Selected Location: <br> <input type="text" value="<?php echo $datadetails['location']; ?>" readonly> </input>  </label>
       <br>
     </div>
     <p><button class="w3-btn w3-dark-green" style="float:right" onclick="confirm()">Confirm and Search</button></p>
+
     </div>
-
-
   </div>
-</header>
+  </div>
 
+<!--
+  <div class="row" style="margin-left:5%;width:60%;margin-top:-10%;">
+    <ul class="w3-navbar w3-black">
+      <li><a href="javascript:void(0)" class="tablink"><i class="fa fa-plane w3-margin-right"></i>Product Details</a></li>
+    </ul>
+
+
+    <div style="margin-left:5%;margin-bottom:2%;width:60%;">
+    <div id="Flight" class="w3-container w3-white w3-padding-16">
+
+    </div>
+    </div>
+  </div> -->
+
+
+</header>
 
 <form id="tale" method="post" action="updatedetails.php">
     <input type="hidden" value="confirmed" name="letitgo">
@@ -92,22 +111,6 @@ function confirm(){
    document.getElementById('tale').submit();
 }
 
-// Tabs
-function openLink(evt, linkName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("myLink");
-  for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
-  }
-  document.getElementById(linkName).style.display = "block";
-  evt.currentTarget.className += " w3-green";
-}
-// Click on the first tablink on load
-document.getElementsByClassName("tablink")[0].click();
 </script>
 
 </body>

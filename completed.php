@@ -15,7 +15,7 @@
   else if(isset($_REQUEST['finishdo'])){
     session_unset();
     session_destroy();
-    header('location:home.phpcompleted=1');
+    header('location:home.php?completed=1');
     die();
   }
 

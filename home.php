@@ -28,8 +28,16 @@ if (isset($_SESSION['logIN']) && $_SESSION['logIN']==1){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/login.css">
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
-.myLink {display: none}
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+  .myLink {display: none}
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+  input[type="number"] {
+      -moz-appearance: textfield;
+  }
 </style>
 
 <script>
@@ -238,18 +246,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
       <br>
-      <label><b>Re-Enter Password</b></label>
-      <input type="password" placeholder="Enter Password" name="rpsw" required>
-      <br>
       <label><b>Contact Number</b></label>
       <input type="number" placeholder="Enter Your Phone Number" name="unumber" required>
       <br>
       <label><b>Do you want to contacted via whatsapp? </b></label>
-      <input type="number" placeholder="Enter Your Phone Number" name="whatsapp" required>
-      <span>
+      <select name="whatsapp">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+      <p>
+      <div class="row">
       <input type="submit" class="w3-btn w3-medium w3-red" name="submitRegister" value=Register style:"float:left"> </input>
-      <button type="button" onclick="document.getElementById('register').style.display='none'" class="w3-btn w3-medium w3-red" style:"float:left">Cancel</button>
-      </span>
+      <button type="button" onclick="document.getElementById('register').style.display='none'" class="w3-btn w3-medium w3-red" style:"float:right">Cancel</button>
+      </div>
     </div>
   </form>
 </div>
@@ -297,6 +306,13 @@ document.getElementsByClassName("tablink")[0].click();
 <?php
 // session_unset();
 // session_destroy();
+if (isset($_REQUEST['completed'])){
+    ?>
+    <script>
+    messages("Thank You For Chosing Us! <br> You have been logged out");
+    </script>
+    <?php
+}
  ?>
 <!-- </header> -->
 </body>

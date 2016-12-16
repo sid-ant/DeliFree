@@ -5,6 +5,14 @@
   // redirect to home.php if not logged in!
   // add a check if the user has any ad or not! do whatever to make sure he came here from details.php and not just being smart duh?
 
+  if(isset($_SESSION["logIN"]) && $_SESSION["logIN"]==1){
+      continue;
+    }
+  else{
+      header('location:home.php');
+      die();
+  }
+
   $dataTableName = "listings";
   $did = $_SESSION['did'];
 

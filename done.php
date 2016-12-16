@@ -2,7 +2,14 @@
   session_start();
   include('dbconn.php');
 
-  //check if already logged in or not!
+  if(isset($_SESSION["logIN"]) && $_SESSION["logIN"]==1){
+      continue;
+    }
+  else{
+      header('location:home.php');
+      die();
+  }
+
   $dataTableName='listings';
   $userTableName='users';
 
@@ -95,8 +102,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       Did this complete your order?
       <br>
       Would you like to remove your ad?
-    <p><button class="w3-btn w3-sand" style="float:right" onclick="completed('1');">NO</p>
-    <p><button class="w3-btn w3-indigo" style="float:right" onclick="completed('0');">YES</p>
+    <p><button class="w3-btn w3-sand" style="float:right" onclick="completed('0');">NO</p>
+    <p><button class="w3-btn w3-indigo" style="float:right" onclick="completed('1');">YES</p>
     </div>
   </div>
 
