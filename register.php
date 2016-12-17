@@ -19,8 +19,9 @@ if(isset($_REQUEST['submitRegister'])){
     $_SESSION["registerAttempted"]=1;
     $name = htmlspecialchars($_REQUEST['uname']);
     $email = htmlspecialchars($_REQUEST['uemail']);
-    $contact = htmlspecialchars($_REQUEST['unumber']);
-    $password = htmlspecialchars($_REQUEST['psw']);
+    $contact = $_REQUEST['unumber'];
+    $pass = htmlspecialchars($_REQUEST['psw']);
+    $password = md5($pass);
     $whatsapp = htmlspecialchars($_REQUEST['whatsapp']);
 
     $row=  mysqli_fetch_array(mysqli_query($conn,"SELECT * from $tablename where email='$email' or contact='$contact' "));
@@ -38,6 +39,7 @@ if(isset($_REQUEST['submitRegister'])){
                                       VALUES ('$name','$email','$password','$contact', '$whatsapp')";
       $run=$conn->query($sql);
       $_SESSION["userAdded"]=1;
+      include("sendmail.php");
       header("Location:home.php");
       die();
       }
@@ -45,8 +47,8 @@ if(isset($_REQUEST['submitRegister'])){
 
 if(isset($_REQUEST['submitLogin'])){
   $email = htmlspecialchars($_REQUEST['uemail']);
-  $password = htmlspecialchars($_REQUEST['psw']);}
-
+  $pass = htmlspecialchars($_REQUEST['psw']);}
+  $password=md5($pass);
   $row=  mysqli_fetch_array(mysqli_query($conn,"SELECT * from $tablename where email='$email' and password='$password'"));
   if($row['email']!=null && $row['password']!=null){
     $_SESSION["logIN"]=1;

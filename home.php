@@ -220,8 +220,6 @@ if (isset($_SESSION['logIN']) && $_SESSION['logIN']==1){
   <div class="container" style="background-color:#f1f1f1">
     You have been successfully registered.
     <br>
-    Please check your email to activate your account.
-    <br>
     <button type="button" onclick="document.getElementById('userAdded').style.display='none'" class="cancelbtn">Close</button>
   </div>
 </div>
@@ -280,7 +278,7 @@ if (isset($_SESSION['logIN']) && $_SESSION['logIN']==1){
 
     <div class="container" style="background-color:#f1f1f1">
       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
+      <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
     </div>
   </form>
 </div>
@@ -432,7 +430,7 @@ if (isset($_REQUEST['completed'])){
     }
   }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=MY_KEY&libraries=places&callback=initAutocomplete"
+<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"
     async defer></script>
 
 </body>

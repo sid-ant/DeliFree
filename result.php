@@ -20,6 +20,7 @@
   $price = $datadetails['price'];
   $location = $datadetails['location'];
   $seller = $datadetails['seller'];
+  //echo "hello world";
   $matches=mysqli_query($conn,"SELECT * FROM $dataTableName WHERE location = '$location' and price+$price>=500 and id<>$did and status='1' and sold='0' and seller='$seller'");
 
   // mysqli_fetch_array(
@@ -53,8 +54,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <?php
   $i=1;
-  if($matches!=FALSE)
+  if($matches!=false && mysqli_num_rows($matches))
     while($row = mysqli_fetch_array($matches)){
+
       ?>
 
 <div class="row">
@@ -80,6 +82,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <?php
 $i++; }
 else {
+
 ?>
 <div class="row">
 <div style="margin-left:5%;margin-bottom:2%;width:60%;">

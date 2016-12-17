@@ -48,17 +48,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   </div>
 </div>
 
-  <div class="w3-display-bottomright" style="margin-left:5%;margin-right:5%;margin-bottom:5%">
-    <div class="w3-card-4">
-      <img src="img/ads/2.jpg" alt="ad" class="w3-image" style="width:300px; height:270px">
-      <div class="w3-container w3-center">
-        </div>
-</div>
-  </div> -->
+-->
 
 
-  <div class="row">
-  <div style="margin-left:5%;margin-bottom:2%;width:60%;margin-top:2%">
+  <div class="w3-row">
+  <div class ="w3-col" style="width:60%;margin-left:5%;margin-bottom:2%;margin-top:2%">
+  <!-- <div style="margin-left:5%;margin-bottom:2%;width:60%;margin-top:2%"> -->
     <ul class="w3-navbar w3-green">
       <li class="w3-red"><a href="#"><i class="fa fa-plane w3-margin-right"></i> Product Details</a></li>
     </ul>
@@ -82,7 +77,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
     </div>
   </div>
+  <div style="margin-left:5%;margin-right:5%;margin-bottom:5%;float:right;margin-top:2%">
+    <div class="w3-card-4">
+      <img src="img/ads/2.jpg" alt="ad" class="w3-image" style="width:300px; height:270px">
+      <div class="w3-container w3-center">
+            advertisement
+        </div>
+      </div>
   </div>
+  <!-- </div> -->
+</div>
+
 
 <!--
   <div class="row" style="margin-left:5%;width:60%;margin-top:-10%;">
