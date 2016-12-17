@@ -6,7 +6,7 @@
   // add a check if the user has any ad or not! do whatever to make sure he came here from details.php and not just being smart duh?
 
   if(isset($_SESSION["logIN"]) && $_SESSION["logIN"]==1){
-      continue;
+      // continue;
     }
   else{
       header('location:home.php');

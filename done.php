@@ -3,7 +3,7 @@
   include('dbconn.php');
 
   if(isset($_SESSION["logIN"]) && $_SESSION["logIN"]==1){
-      continue;
+      // continue;
     }
   else{
       header('location:home.php');
